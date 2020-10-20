@@ -16,48 +16,42 @@ yarn add videojs-media-playback-test-helpers
 
 ## Usage
 
-To include videojs-media-playback-test-helpers on your website or web application, use any of the following methods.
-
-### `<script>` Tag
-
-This is the simplest case. Get the script in whatever way you prefer and include the plugin _after_ you include [video.js][videojs], so that the `videojs` global is available.
-
-```html
-<script src="//path/to/video.min.js"></script>
-<script src="//path/to/videojs-media-playback-test-helpers.min.js"></script>
-<script>
-  var player = videojs('my-video');
-
-  player.mediaPlaybackTestHelpers();
-</script>
-```
-
-### Browserify/CommonJS
-
-When using with Browserify, install videojs-media-playback-test-helpers via npm and `require` the plugin as you would any other module.
+This plugin is meant to be used in tests. The first step is to get a reference to a [video.js player](https://docs.videojs.com/player) object.
 
 ```js
-var videojs = require('video.js');
+import videojs from 'video.js';
 
-// The actual plugin function is exported by this module, but it is also
-// attached to the `Player.prototype`; so, there is no need to assign it
-// to a variable.
-require('videojs-media-playback-test-helpers');
-
-var player = videojs('my-video');
-
-player.mediaPlaybackTestHelpers();
+const player = videojs('some-player-id');
 ```
 
-### RequireJS/AMD
-
-When using with RequireJS (or another AMD library), get the script in whatever way you prefer and `require` the plugin as you normally would:
-
+Once you have a player reference, you can now make calls to the test helpers like so:
 ```js
-require(['video.js', 'videojs-media-playback-test-helpers'], function(videojs) {
-  var player = videojs('my-video');
+// Pause the test until the player's ready event has fired
+await player.waitForReady();
+```
 
-  player.mediaPlaybackTestHelpers();
+A common practice is to create the player instance and wait for it to be in a ready state before each test. Here is an example using [QUnit](https://qunitjs.com/):
+```js
+import videojs from 'video.js';
+
+QUnit.module('test-helper-example', {
+  beforeEach: async function() {
+    this.fixture = document.getElementById('qunit-fixture');
+    this.video = document.createElement('video');
+    // Add the video to our test fixture
+    this.fixture.appendChild(this.video);
+    // Create a player instance
+    this.player = videojs(this.video);
+    // Create a plugin instance
+    this.plugin = this.player.mediaPlaybackTestHelpers();
+    // Pause the test runner until the player's `ready` event has fired
+    await this.plugin.waitForReady();
+  },
+
+  afterEach() {
+    // Make sure to tear down the player instance after each test
+    this.player.dispose();
+  }
 });
 ```
 
@@ -66,4 +60,4 @@ require(['video.js', 'videojs-media-playback-test-helpers'], function(videojs) {
 Thanks to [Scott Parsons](https://www.linkedin.com/in/scottaparsons/) for writing much of the original code and getting these test helpers into a shareable state.
 
 
-[videojs](http://videojs.com/)
+[videojs]:http://videojs.com/
