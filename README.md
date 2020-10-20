@@ -1,15 +1,17 @@
 # videojs-media-playback-test-helpers
 
-Deterministically play real media in tests
+This plugin provides a set of test helpers that facilitate playing real media from your tests.
 
-## Table of Contents
-
-<!-- START doctoc -->
-<!-- END doctoc -->
 ## Installation
 
+via npm:
 ```sh
 npm install --save videojs-media-playback-test-helpers
+```
+
+via yarn:
+```sh
+yarn add videojs-media-playback-test-helpers
 ```
 
 ## Usage
@@ -59,9 +61,9 @@ require(['video.js', 'videojs-media-playback-test-helpers'], function(videojs) {
 });
 ```
 
-## License
+## Credit
 
-MIT. Copyright (c) Evan Farina &lt;farina.evan@gmail.com&gt;
+Thanks to [Scott Parsons](https://www.linkedin.com/in/scottaparsons/) for writing much of the original code and getting these test helpers into a shareable state.
 
 
-[videojs]: http://videojs.com/
+[videojs](http://videojs.com/)
