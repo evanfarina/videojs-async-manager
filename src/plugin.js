@@ -40,8 +40,6 @@ class MediaPlaybackTestHelpers extends Plugin {
     // the parent class will add player under this.player
     super(player);
 
-    player.addClass('the-player-with-plugin');
-
     this.options = videojs.mergeOptions(defaults, options);
 
     this.Promise = player.options().Promise || window.Promise;

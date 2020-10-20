@@ -16,6 +16,7 @@ module.exports = function(config) {
           flags: [
             '--disable-translate',
             '--disable-extensions',
+            '--mute-audio',
             // Chrome 66+ introduces a policy that requires user interaction before autoplay is allowed
             // this flag disables that policy and allows autoplay regardless of user interaction
             '--autoplay-policy=no-user-gesture-required',
