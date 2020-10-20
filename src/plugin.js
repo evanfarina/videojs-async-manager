@@ -21,10 +21,10 @@ const defaults = {};
  *
  * See: https://blog.videojs.com/feature-spotlight-advanced-plugins/
  */
-class MediaPlaybackTestHelpers extends Plugin {
+class AsyncManager extends Plugin {
 
   /**
-   * Create a MediaPlaybackTestHelpers plugin instance.
+   * Create a AsyncManager plugin instance.
    *
    * @param  {Player} player
    *         A Video.js Player instance.
@@ -327,12 +327,12 @@ class MediaPlaybackTestHelpers extends Plugin {
 }
 
 // Define default values for the plugin's `state` object here.
-MediaPlaybackTestHelpers.defaultState = {};
+AsyncManager.defaultState = {};
 
 // Include the version number.
-MediaPlaybackTestHelpers.VERSION = VERSION;
+AsyncManager.VERSION = VERSION;
 
 // Register the plugin with video.js.
-videojs.registerPlugin('mediaPlaybackTestHelpers', MediaPlaybackTestHelpers);
+videojs.registerPlugin('asyncManager', AsyncManager);
 
-export default MediaPlaybackTestHelpers;
+export default AsyncManager;

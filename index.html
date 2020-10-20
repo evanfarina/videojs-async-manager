@@ -2,12 +2,12 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>videojs-media-playback-test-helpers Demo</title>
+  <title>videojs-async-manager Demo</title>
   <link href="node_modules/video.js/dist/video-js.css" rel="stylesheet">
   
 </head>
 <body>
-  <video id="videojs-media-playback-test-helpers-player" class="video-js vjs-default-skin" controls>
+  <video id="videojs-async-manager-player" class="video-js vjs-default-skin" controls>
     <source src="//vjs.zencdn.net/v/oceans.mp4" type='video/mp4'>
     <source src="//vjs.zencdn.net/v/oceans.webm" type='video/webm'>
   </video>
@@ -16,11 +16,11 @@
     <li><a href="docs/api/">Read generated docs.</a></li>
   </ul>
   <script src="node_modules/video.js/dist/video.js"></script>
-  <script src="dist/videojs-media-playback-test-helpers.js"></script>
+  <script src="dist/videojs-async-manager.js"></script>
   <script>
     (function(window, videojs) {
-      var examplePlayer = window.examplePlayer = videojs('videojs-media-playback-test-helpers-player');
-      var mediaPlaybackTestHelpers = window.mediaPlaybackTestHelpers = examplePlayer.mediaPlaybackTestHelpers();
+      var examplePlayer = window.examplePlayer = videojs('videojs-async-manager-player');
+      var asyncManager = window.asyncManager = examplePlayer.asyncManager();
     }(window, window.videojs));
   </script>
 </body>

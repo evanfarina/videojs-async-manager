@@ -12,7 +12,7 @@ QUnit.test('the environment is sane', function(assert) {
   assert.strictEqual(typeof plugin, 'function', 'plugin is a function');
 });
 
-QUnit.module('videojs-media-playback-test-helpers', {
+QUnit.module('videojs-async-manager', {
   beforeEach: async function() {
     this.fixture = document.getElementById('qunit-fixture');
     this.video = document.createElement('video');
@@ -21,7 +21,7 @@ QUnit.module('videojs-media-playback-test-helpers', {
     this.player = videojs(this.video, {
       enableSourceset: true,
     });
-    this.plugin = this.player.mediaPlaybackTestHelpers();
+    this.plugin = this.player.asyncManager();
 
     await this.plugin.waitForReady();
   },

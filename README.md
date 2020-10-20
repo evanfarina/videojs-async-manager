@@ -1,4 +1,16 @@
-# videojs-media-playback-test-helpers
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+
+- [videojs-async-manager](#videojs-async-manager)
+  - [Installation](#installation)
+  - [Usage](#usage)
+      - [Example](#example)
+  - [Credit](#credit)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+# videojs-async-manager
 
 This plugin provides a set of test helpers that facilitate playing real media from your tests.
 
@@ -6,12 +18,12 @@ This plugin provides a set of test helpers that facilitate playing real media fr
 
 via npm:
 ```sh
-npm install --save videojs-media-playback-test-helpers
+npm install --save videojs-async-manager
 ```
 
 via yarn:
 ```sh
-yarn add videojs-media-playback-test-helpers
+yarn add videojs-async-manager
 ```
 
 ## Usage
@@ -27,7 +39,7 @@ const player = videojs('some-player-id');
 Once you have a player reference, you can now make calls to the test helpers like so:
 ```js
 // Pause the test until the player's ready event has fired
-await player.mediaPlaybackTestHelpers().waitForReady();
+await player.asyncManager().waitForReady();
 ```
 
 #### Example 
@@ -36,7 +48,7 @@ This example uses [QUnit](https://qunitjs.com/) but the general idea will be the
 ```js
 import videojs from 'video.js';
 
-QUnit.module('test-helper-example', {
+QUnit.module('Managing async from tests', {
   beforeEach: async function() {
     this.fixture = document.getElementById('qunit-fixture');
     this.video = document.createElement('video');
@@ -47,7 +59,7 @@ QUnit.module('test-helper-example', {
       enableSourceset: true, // Note: Passing this option is required so that Player emits the sourceset event
     });
     // Create a plugin instance
-    this.mediaWaiter = this.player.mediaPlaybackTestHelpers();
+    this.mediaWaiter = this.player.asyncManager();
     // Pause the test runner until the player's `ready` event has fired
     await this.mediaWaiter.waitForReady();
   },

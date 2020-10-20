@@ -1,9 +1,9 @@
 {
-  "name": "videojs-media-playback-test-helpers",
+  "name": "videojs-async-manager",
   "version": "0.0.0",
   "description": "Deterministically play real media in tests",
-  "main": "dist/videojs-media-playback-test-helpers.cjs.js",
-  "module": "dist/videojs-media-playback-test-helpers.es.js",
+  "main": "dist/videojs-async-manager.cjs.js",
+  "module": "dist/videojs-async-manager.es.js",
   "generator-videojs-plugin": {
     "version": "7.6.3"
   },
