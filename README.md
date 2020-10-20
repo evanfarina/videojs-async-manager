@@ -1,18 +1,6 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-
-- [videojs-async-manager](#videojs-async-manager)
-  - [Installation](#installation)
-  - [Usage](#usage)
-      - [Example](#example)
-  - [Credit](#credit)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 # videojs-async-manager
 
-This plugin provides a set of test helpers that facilitate playing real media from your tests.
+This plugin facilitates waiting on asyncrhony that's started throughout media playback. The helpers provided by this plugin can be used to deterministically play real media in your tests, making mock media a thing of the past.
 
 ## Installation
 
@@ -59,9 +47,9 @@ QUnit.module('Managing async from tests', {
       enableSourceset: true, // Note: Passing this option is required so that Player emits the sourceset event
     });
     // Create a plugin instance
-    this.mediaWaiter = this.player.asyncManager();
+    this.asyncManager = this.player.asyncManager();
     // Pause the test runner until the player's `ready` event has fired
-    await this.mediaWaiter.waitForReady();
+    await this.asyncManager.waitForReady();
   },
 
   afterEach() {
@@ -72,26 +60,27 @@ QUnit.module('Managing async from tests', {
   Qunit.test('Media playback in tests!', async function() {
     // The player is already ready because of our waitForReady call in beforeEach.
     // Let's set the media's source...
-    await this.mediaWaiter.setSource('assets/video/video-1s.mp4');
+    await this.asyncManager.setSource('assets/video/video-1s.mp4');
     
     // Request playback and wait for the media to begin playing
-    await this.mediaWaiter.play();
+    await this.asyncManager.play();
     assert.ok(!this.player.paused(), 'The media is playing');
     
     // Request that the media pause
-    await this.mediaWaiter.pause();
+    await this.asyncManager.pause();
     assert.ok(this.player.paused(), 'is paused');
   });
   
   QUnit.test('seekToTime', async function(assert) {
-    await this.mediaWaiter.setSource('assets/video/video-10s.mp4');
-    await this.mediaWaiter.play();
-    await this.mediaWaiter.seekToTime(2);
-
+    await this.asyncManager.setSource('assets/video/video-10s.mp4');
+    await this.asyncManager.play();
+    await this.asyncManager.seekToTime(2);
+    
+    // A more realistic assertion may be to check that a tracking event fired during playback, or that some UI (time-delayed comments, perhaps) appeared on the screen
     assert.ok(this.player.currentTime() >= 2, 'seeked to 2s while playing');
 
-    await this.mediaWaiter.pause();
-    await this.mediaWaiter.seekToTime(4);
+    await this.asyncManager.pause();
+    await this.asyncManager.seekToTime(4);
     assert.ok(this.player.currentTime() >= 4, 'seeked to 4s when paused');
   });
 });
