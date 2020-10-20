@@ -27,10 +27,11 @@ const player = videojs('some-player-id');
 Once you have a player reference, you can now make calls to the test helpers like so:
 ```js
 // Pause the test until the player's ready event has fired
-await player.waitForReady();
+await player.mediaPlaybackTestHelpers().waitForReady();
 ```
 
-A common practice is to create the player instance and wait for it to be in a ready state before each test. Below is an example using [QUnit](https://qunitjs.com/). **NOTE** - It's necesasry to pass the `enableSourceset` option to videojs because some of our helpers are reliant on the `sourceset` event firing.
+#### Example 
+This example uses [QUnit](https://qunitjs.com/) but the general idea will be the same regardless of your test framework. **One important note -** It's necesasry to pass the `enableSourceset` option to videojs because some of our helpers are reliant on the `sourceset` event firing.
 
 ```js
 import videojs from 'video.js';
@@ -46,15 +47,41 @@ QUnit.module('test-helper-example', {
       enableSourceset: true, // Note: Passing this option is required so that Player emits the sourceset event
     });
     // Create a plugin instance
-    this.plugin = this.player.mediaPlaybackTestHelpers();
+    this.mediaWaiter = this.player.mediaPlaybackTestHelpers();
     // Pause the test runner until the player's `ready` event has fired
-    await this.plugin.waitForReady();
+    await this.mediaWaiter.waitForReady();
   },
 
   afterEach() {
     // Make sure to tear down the player instance after each test
     this.player.dispose();
-  }
+  },
+  
+  Qunit.test('Media playback in tests!', async function() {
+    // The player is already ready because of our waitForReady call in beforeEach.
+    // Let's set the media's source...
+    await this.mediaWaiter.setSource('assets/video/video-1s.mp4');
+    
+    // Request playback and wait for the media to begin playing
+    await this.mediaWaiter.play();
+    assert.ok(!this.player.paused(), 'The media is playing');
+    
+    // Request that the media pause
+    await this.mediaWaiter.pause();
+    assert.ok(this.player.paused(), 'is paused');
+  });
+  
+  QUnit.test('seekToTime', async function(assert) {
+    await this.mediaWaiter.setSource('assets/video/video-10s.mp4');
+    await this.mediaWaiter.play();
+    await this.mediaWaiter.seekToTime(2);
+
+    assert.ok(this.player.currentTime() >= 2, 'seeked to 2s while playing');
+
+    await this.mediaWaiter.pause();
+    await this.mediaWaiter.seekToTime(4);
+    assert.ok(this.player.currentTime() >= 4, 'seeked to 4s when paused');
+  });
 });
 ```
 
