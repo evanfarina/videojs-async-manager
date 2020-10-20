@@ -30,7 +30,8 @@ Once you have a player reference, you can now make calls to the test helpers lik
 await player.waitForReady();
 ```
 
-A common practice is to create the player instance and wait for it to be in a ready state before each test. Here is an example using [QUnit](https://qunitjs.com/):
+A common practice is to create the player instance and wait for it to be in a ready state before each test. Below is an example using [QUnit](https://qunitjs.com/). **NOTE** - It's necesasry to pass the `enableSourceset` option to videojs because some of our helpers are reliant on the `sourceset` event firing.
+
 ```js
 import videojs from 'video.js';
 
@@ -40,8 +41,10 @@ QUnit.module('test-helper-example', {
     this.video = document.createElement('video');
     // Add the video to our test fixture
     this.fixture.appendChild(this.video);
-    // Create a player instance
-    this.player = videojs(this.video);
+    // Create a player instance. IMPORTANT
+    this.player = videojs(this.video, {
+      enableSourceset: true, // Note: Passing this option is required so that Player emits the sourceset event
+    });
     // Create a plugin instance
     this.plugin = this.player.mediaPlaybackTestHelpers();
     // Pause the test runner until the player's `ready` event has fired
