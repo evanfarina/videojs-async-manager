@@ -88,6 +88,7 @@ class MediaPlaybackTestHelpers extends Plugin {
 
   /**
    * Wait until an event has completed - see LIFECYCLE_EVENTS for all applicable events
+   * 
    * @param {string} - The name of the event
    * @return {Promise}
    */
@@ -97,6 +98,7 @@ class MediaPlaybackTestHelpers extends Plugin {
 
   /**
    * Play the media and wait until playing promise is complete
+   * 
    * @return {Promise}
    */
   play() {
@@ -110,7 +112,8 @@ class MediaPlaybackTestHelpers extends Plugin {
   }
 
   /**
-   * Pause the media and wait for the pause vent
+   * Pause the media and wait for the pause event
+   * 
    * @return {Promise}
    */
   pause() {
@@ -126,7 +129,8 @@ class MediaPlaybackTestHelpers extends Plugin {
   }
 
   /**
-   * Mute the player and wait for volumechange
+   * Mute the player and wait for the volumechange event
+   * 
    * @return {Promise}
    */
   mute() {
@@ -142,7 +146,8 @@ class MediaPlaybackTestHelpers extends Plugin {
   }
 
   /**
-   * Unmute the player and wait for volumechange
+   * Unmute the player and wait for the volumechange event
+   * 
    * @return {Promise}
    */
   unmute() {
@@ -159,6 +164,7 @@ class MediaPlaybackTestHelpers extends Plugin {
 
   /**
    * Set the source of the media and wait for the sourceset event
+   * 
    * @param {object|string} src - The desired source
    * @return {Promise}
    */
@@ -171,6 +177,7 @@ class MediaPlaybackTestHelpers extends Plugin {
 
   /**
    * Set the player volume and wait for the volumechange event
+   * 
    * @param {number} volume - The desired volume
    * @return {Promise}
    */
@@ -190,6 +197,7 @@ class MediaPlaybackTestHelpers extends Plugin {
 
   /**
    * Set the player poster and wait for the posterchange event
+   * 
    * @param {string} poster - The poster to set
    * @return {Promise}
    */
@@ -204,6 +212,7 @@ class MediaPlaybackTestHelpers extends Plugin {
 
   /**
    * Reset the player and wait for playerreset event
+   * 
    * @return {Promise}
    */
   reset() {
@@ -215,6 +224,7 @@ class MediaPlaybackTestHelpers extends Plugin {
 
   /**
    * Seek to a time in in the media
+   * 
    * @param {number} time - The time in seconds
    * @return {Promise}
    */
@@ -228,7 +238,8 @@ class MediaPlaybackTestHelpers extends Plugin {
 
   /**
    * Seek to the media end - resolves on ended event
-   * Note: Causes the player to play if not already playing.
+   * Note: Causes the player to play if not already playing
+   * 
    * @return {Promise}
    */
   seekToEnd() {
@@ -256,6 +267,7 @@ class MediaPlaybackTestHelpers extends Plugin {
 
   /**
    * Wait for the player ready event to complete
+   * 
    * @return {Promise}
    */
   waitForReady() {
@@ -266,6 +278,7 @@ class MediaPlaybackTestHelpers extends Plugin {
 
   /**
    * Wait until the media has reached a specified time
+   * 
    * @param {number} time - Time to wait in seconds
    */
   waitForTime(time) {
@@ -279,6 +292,7 @@ class MediaPlaybackTestHelpers extends Plugin {
    * Wait until the media has reached the end
    * Note: Does not cause the media to play. If wanting to skip
    * to the media end use the `end` helper.
+   * 
    * @return {Promise}
    */
   waitForEnd() {
@@ -299,6 +313,7 @@ class MediaPlaybackTestHelpers extends Plugin {
 
   /**
    * Wait until the media has reached a specified time
+   * 
    * @return {Promise}
    */
   waitForPlay() {
